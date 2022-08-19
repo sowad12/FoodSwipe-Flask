@@ -1,7 +1,8 @@
+
 from app import *
 from .controllers.authControl import *
 from flask_cors import CORS
-import bcrypt
+
 
 CORS(app)
 @app.route('/')
@@ -49,3 +50,35 @@ def login():
         return "success",200 
     else:
         return  statusMsg,400  
+
+#Restaurant data
+# @app.route('/PostRest',methods=['POST'])   
+# def restaurantPost():
+#     d=dict()
+#     d={
+#      'RestId':request.json['RestId'],
+#      'RestName':request.json['RestName'],
+#      'RestEmail':request.json['RestEmail'],
+#     'RestLocation':request.json['RestLocation'],
+#     'RestDescription':request.json['RestDescription'],
+#     'RestRating':request.json['RestRating'],
+#     # 'RestImg':request.json[ 'RestImg'],
+
+#     }
+
+    # statusMsg= loginControl(d)
+
+    # if(statusMsg=="ok"): 
+    #     # db.sample.insert_one(d)
+    #     return "success",200 
+    # else:
+    #     return  statusMsg,400      
+
+@app.route('/getAllRest',methods=['GET'])
+def getALLRest():
+    l=list(db.restaurants.find({},{'_id':0}))
+    print(l)
+    # for x in range(len(l)):
+    #     print(l[x])
+    return jsonify(l)
+    # return "ok"
