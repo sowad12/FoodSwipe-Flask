@@ -85,8 +85,8 @@ const isLogged=true;
       <Wrapper>
       <Left>
           <Logo>
-          <h5>FOOD SWIPE</h5>
-
+          {/* <h5>FOOD SWIPE</h5> */}
+    <NavLink to='/' ><h5>FOOD SWIPE</h5></NavLink> 
           {/* <NavLink to='/RestaurantList' ><h5>FOOD SWIPE</h5></NavLink> */}
           </Logo>
           

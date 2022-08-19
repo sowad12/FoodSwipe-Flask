@@ -1,6 +1,8 @@
 
+
 from app import *
 from .controllers.authControl import *
+
 from flask_cors import CORS
 
 
@@ -28,7 +30,7 @@ def reg():
     statusMsg= registerControl(d)
 
     if(statusMsg=="ok"): 
-        db.sample.insert_one(d)
+        db.users.insert_one(d)
         return "success",200 
     else:
         return  statusMsg,400    
@@ -77,8 +79,15 @@ def login():
 @app.route('/getAllRest',methods=['GET'])
 def getALLRest():
     l=list(db.restaurants.find({},{'_id':0}))
-    print(l)
+    # print(l)
     # for x in range(len(l)):
     #     print(l[x])
     return jsonify(l)
     # return "ok"
+
+#food and items data 
+@app.route('/getAllFoods/<string:foodRestId>/',methods=['GET'])
+def getAllFoods(foodRestId):
+    foodRestId=str(foodRestId)
+    l=list(db.foods.find({'foodRestId':foodRestId},{'_id':0}))  
+    return jsonify(l)
