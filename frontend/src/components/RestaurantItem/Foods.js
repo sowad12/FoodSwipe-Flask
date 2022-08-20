@@ -20,30 +20,35 @@ const Foods = ({RestaurantName,filters}) => {
   const[status,setStatus]=useState('')
   const {Restaurant}=useParams()
   // console.log(Restaurant)
-  //  console.log(useParams())
-//   const filter=useSelector(state=>state.filter)
+//    console.log(useParams())
+  const filter=useSelector(state=>state.filter)
+
+   const{searchItem,sort,rating}=filter
+    // console.log(typeof(rating))
+  
 //   const{searchItem,sort,rating  }=filter
   // console.log(searchItem)
-//    useEffect(()=>{
-//     const  getSearchFood=async()=>{
-//       try{ 
-//          const config={
-//              headers:{
-//               "Content-Type": "application/json",
-//              }
-//            }
-//          const res=await axios.get(`/getSearchFood?foodRestId=${Restaurant}&foodName=${searchItem} `,config)
-//           // console.log(res.data)
-//          setStatus(200)
-//          setFoods(res.data)
-//          }catch(err){
-//            setStatus(err.status)
-//          }  
-//      }
-//      getSearchFood()
-//   },[Restaurant,searchItem])
+   useEffect(()=>{
+    const  getSearchFood=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`http://localhost:5000/getSearchFood/${Restaurant}/${searchItem} `,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getSearchFood()
+  },[Restaurant,searchItem])
 
-  console.log(Restaurant)
+//   console.log(Restaurant)
+  //  console.log(sort.length)
   useEffect(()=>{
     const getAllFoods=async()=>{
       try{ 
@@ -64,43 +69,43 @@ const Foods = ({RestaurantName,filters}) => {
       getAllFoods()
   },[Restaurant])
 
-//   useEffect(()=>{
-//     const  getSortFoods=async()=>{
-//       try{ 
-//          const config={
-//              headers:{
-//               "Content-Type": "application/json",
-//              }
-//            }
-//          const res=await axios.get(`/getSortFoods?restId=${Restaurant}&sortTag=${sort} `,config)
-//           // console.log(res.data)
-//          setStatus(200)
-//          setFoods(res.data)
-//          }catch(err){
-//            setStatus(err.status)
-//          }  
-//      }
-//      getSortFoods()
-//   },[sort])
- 
-//   useEffect(()=>{
-//     const  getRatingFood=async()=>{
-//       try{ 
-//          const config={
-//              headers:{
-//               "Content-Type": "application/json",
-//              }
-//            }
-//          const res=await axios.get(`/getRatingFood?restId=${Restaurant}&rating=${rating} `,config)
-//           // console.log(res.data)
-//          setStatus(200)
-//          setFoods(res.data)
-//          }catch(err){
-//            setStatus(err.status)
-//          }  
-//      }
-//      getRatingFood()
-//   },[rating])
+  useEffect(()=>{
+    const  getSortFoods=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`http://localhost:5000/getSortFoods/${Restaurant}/${sort} `,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getSortFoods()
+  },[Restaurant,sort])
+
+  useEffect(()=>{
+    const  getRatingFood=async()=>{
+      try{ 
+         const config={
+             headers:{
+              "Content-Type": "application/json",
+             }
+           }
+         const res=await axios.get(`http://localhost:5000/getRatingFoods/${Restaurant}/${rating}`,config)
+          // console.log(res.data)
+         setStatus(200)
+         setFoods(res.data)
+         }catch(err){
+           setStatus(err.status)
+         }  
+     }
+     getRatingFood()
+  },[Restaurant,rating])
 
   return (
     <Container>

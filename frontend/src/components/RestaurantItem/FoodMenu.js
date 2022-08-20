@@ -1,12 +1,12 @@
 import React,{useState} from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-// import Searchbar from "../Filter/Searchbar/Searchbar";
+import Searchbar from "../Filter/Searchbar/Searchbar";
 import Foods from "./Foods";
 import Footer from "../Footer/Footer";
 import { Checkbox,  FormControlLabel, FormGroup} from '@material-ui/core'
 import { useLocation } from "react-router-dom";
-// import CheckFilter from "../Filter/LeftSidebar/CheckFilter";
+import CheckFilter from "../Filter/LeftSidebar/CheckFilter";
 
 const Container = styled.div``;
 
@@ -61,20 +61,20 @@ const FoodMenu = () => {
 //     [e.target.name]:value
 //   })
 //  }
-//  const SortPriceHandler=(e)=>{
-//    /* console.log(e.target.value) */
-//    dispatch({type:'SortPrice',payload:e.target.value})
-//  }
+ const SortPriceHandler=(e)=>{
+    // console.log(e.target.value) 
+   dispatch({type:'SortPrice',payload:e.target.value})
+ }
 /* console.log(filters) */
 
   return (
     <Container>
-      {/* <Searchbar /> */}
+      <Searchbar />
       
       <FilterContainer>
         <Filter>
           <Side>
-            {/* <CheckFilter/> */}
+            <CheckFilter/>
           </Side>
   <Title>Catagories</Title> 
       
@@ -94,7 +94,7 @@ const FoodMenu = () => {
         <Filter>
         <BoxFilter>
         <FilterText>SORT BY(PRICE):</FilterText>
-          <Select name="PRICE" >
+          <Select name="PRICE" onChange={SortPriceHandler} >
             <Option value="default">DEFAULT</Option>
             <Option value="asc">LOW-HIGH</Option>
             <Option value="desc">HIGH-LOW</Option>

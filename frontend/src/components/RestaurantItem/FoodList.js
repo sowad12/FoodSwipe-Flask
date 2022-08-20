@@ -6,7 +6,7 @@ import {
     PageviewOutlined
   } from "@material-ui/icons";
   import { NavLink } from "react-router-dom";
-//   import Rating from '@material-ui/lab/Rating';
+  import Rating from '@material-ui/lab/Rating';
   import styled from "styled-components";
   
   const Info = styled.div`
@@ -85,10 +85,10 @@ import {
       transform: scale(1.1);
     }
   `;
-  
+
   const FoodList = ({ items }) => {
   
-  
+    // console.log(items._id.$oid)
     return (
    <div >
       <Container >
@@ -100,7 +100,7 @@ import {
           </Icon>
           <Icon>
         
-          <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id}`}><PageviewOutlined/></NavLink>
+          <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id.$oid}`}><PageviewOutlined/></NavLink>
            
           </Icon>
           <Icon>
@@ -112,7 +112,7 @@ import {
       <CardContainer>
       <p ><b color="green">{items.foodName}</b></p>
       <p><b>Price:{items.foodPrice}</b></p>
-      {/* <Rating name="size-medium" defaultValue={items.foodRating} /> */}
+      <Rating name="size-medium" value={items.foodRating} />
   </CardContainer>
       </Card>
       </div>  
