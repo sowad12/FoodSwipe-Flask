@@ -122,7 +122,7 @@ const[quantity,setQuantity]=useState(1);
 const [status,setStatus]=useState('');
 const {id}=useParams();
 // console.log(useParams())
-console.log(id) 
+// console.log(id) 
 
 
 useEffect(()=>{
@@ -154,7 +154,15 @@ quantity>1 &&setQuantity(quantity-1)
 }
 const dispatch=useDispatch()
  const handleCart=()=>{
-  dispatch(addToCart(id,quantity))
+ const payload={
+    product: id,
+    foodName: singlefood.foodName,
+    foodImg: singlefood.foodImg,
+    foodPrice:singlefood.foodPrice,
+    foodStock: singlefood.foodStock,
+    qty:quantity
+  }
+  dispatch({type:'Add_to_cart',payload})
  
 } 
   return (

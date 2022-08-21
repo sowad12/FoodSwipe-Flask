@@ -5,6 +5,7 @@ import FoodList from "./FoodList";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { useDispatch } from "react-redux";
 
 
 const Container = styled.div`
@@ -15,6 +16,7 @@ const Container = styled.div`
 `;
 
 const Foods = ({RestaurantName,filters}) => {
+  let flag=0;
   // console.log(RestaurantName,filters,sort)
   const[foods,setFoods]=useState([])
   const[status,setStatus]=useState('')
@@ -28,6 +30,8 @@ const Foods = ({RestaurantName,filters}) => {
   
 //   const{searchItem,sort,rating  }=filter
   // console.log(searchItem)
+  const dispatch=useDispatch();
+
    useEffect(()=>{
     const  getSearchFood=async()=>{
       try{ 
@@ -37,7 +41,9 @@ const Foods = ({RestaurantName,filters}) => {
              }
            }
          const res=await axios.get(`http://localhost:5000/getSearchFood/${Restaurant}/${searchItem} `,config)
-          // console.log(res.data)
+       
+         
+          
          setStatus(200)
          setFoods(res.data)
          }catch(err){
@@ -59,7 +65,8 @@ const Foods = ({RestaurantName,filters}) => {
            }
     
          const res=await axios.get(` http://localhost:5000/getAllFoods/${Restaurant}`,config)
-          console.log(res.data)
+      
+         
          setStatus(200)
          setFoods(res.data)
          }catch(err){
@@ -97,7 +104,7 @@ const Foods = ({RestaurantName,filters}) => {
              }
            }
          const res=await axios.get(`http://localhost:5000/getRatingFoods/${Restaurant}/${rating}`,config)
-          // console.log(res.data)
+         
          setStatus(200)
          setFoods(res.data)
          }catch(err){
@@ -106,6 +113,14 @@ const Foods = ({RestaurantName,filters}) => {
      }
      getRatingFood()
   },[Restaurant,rating])
+
+  
+ useEffect(()=>{
+  dispatch({type:'ItemInfo',payload:foods});
+ },[foods])
+
+  
+  
 
   return (
     <Container>

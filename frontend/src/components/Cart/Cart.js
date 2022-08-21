@@ -5,8 +5,11 @@ import { useDispatch,useSelector } from 'react-redux';
 // import {removeFromCart} from '../redux/actions/shoppingCartAction'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import StripeCheckout from 'react-stripe-checkout';
+// import cartItems from './data';
+// import StripeCheckout from 'react-stripe-checkout';
 const KEY='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
+
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -174,11 +177,12 @@ font-size: larger;
 `
 const Cart = () => {
   const dispatch=useDispatch();
-  // const cart=useSelector(state=>state.cart)
-  const{cartItems,totalPrice}=cart;
+  const cart=useSelector(state=>state.cart)
+  // console.log(cart)
+  const{cartItems}=cart;
   const[rangeItem,setRangeItem]=useState([]);
   const[quantity,setQuantity]=useState(1);
-
+// const toalPrice=100
 
     // const onToken = token => {
     //   const body = {
@@ -218,6 +222,7 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
+
           {cartItems .map((item,key)=>(
           
            <Product key={key}>
@@ -246,7 +251,7 @@ const Cart = () => {
                 <PriceAndDel>
                 <ProductPrice>{item.qty * item.foodPrice }</ProductPrice>
                 <Del >
-                  <DeleteForever fontSize="large" onClick={()=>dispatch(removeFromCart(item.product))}/>
+                  <DeleteForever fontSize="large" onClick={()=>dispatch({type:'REMOVE_FROM_CART',payload:item.product})}/>
                   </Del>   
                </PriceAndDel>
               </PriceDetail>
@@ -261,7 +266,8 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
+              {/* <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice> */}
+               <SummaryItemPrice>100000000</SummaryItemPrice> 
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -275,7 +281,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ 80</SummaryItemPrice>
             </SummaryItem>
-            <Strip>
+            {/* <Strip>
             <StripeCheckout
         
               name="FoodSwipe"
@@ -287,11 +293,11 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
            
-            >
+            > */}
               <Button >CHECKOUT NOW</Button>
      
-            </StripeCheckout>
-            </Strip>
+            {/* </StripeCheckout>
+            </Strip> */}
           </Summary>
         </Bottom>
       </Wrapper>

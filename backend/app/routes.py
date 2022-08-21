@@ -106,17 +106,22 @@ def getAllFoods(foodRestId):
 def getSortFoods(foodRestId,sortTag):
     foodRestId=str(foodRestId)
     sortTag=str(sortTag)
-    cursor=db.foods.find({'foodRestId':foodRestId},{'_id':0})
+    cursor=db.foods.find({'foodRestId':foodRestId})
+ 
     if(sortTag=='asc'):
        
        cursor=cursor.sort('foodPrice')# by default .sort('foodPrice',1)
+       cursor=json.loads(json_util.dumps(cursor))
        l=list(cursor)
+       print(l)
     
     
     elif(sortTag=='desc'):
        cursor=cursor.sort('foodPrice',-1)# by default .sort('foodPrice',1)
+       cursor=json.loads(json_util.dumps(cursor))
        l=list(cursor)
     else:
+        cursor=json.loads(json_util.dumps(cursor))
         l=list(cursor)  
 
     return jsonify(l)    
@@ -127,7 +132,8 @@ def getRatingFoods(foodRestId,rating):
     if(rating):
        rating=int(rating)
 
-       cursor=db.foods.find({'foodRestId':foodRestId,'foodRating':rating},{'_id':0})
+       cursor=db.foods.find({'foodRestId':foodRestId,'foodRating':rating})
+       cursor=json.loads(json_util.dumps(cursor))
        l=list(cursor)  
   
     return jsonify(l)   
@@ -138,7 +144,8 @@ def getSearchFood(foodRestId,foodName):
     foodRestId=str(foodRestId)
     foodName=str(foodName)
   
-    cursor=db.foods.find({'foodRestId':foodRestId,'foodName':foodName},{'_id':0})
+    cursor=db.foods.find({'foodRestId':foodRestId,'foodName':foodName})
+    cursor=json.loads(json_util.dumps(cursor))
     l=list(cursor)  
   
     return jsonify(l)   

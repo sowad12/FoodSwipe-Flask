@@ -8,6 +8,8 @@ import {
   import { NavLink } from "react-router-dom";
   import Rating from '@material-ui/lab/Rating';
   import styled from "styled-components";
+  import { useDispatch } from "react-redux";
+  import { useSelector } from "react-redux";
   
   const Info = styled.div`
     opacity: 0;
@@ -88,7 +90,9 @@ import {
 
   const FoodList = ({ items }) => {
   
-    // console.log(items._id.$oid)
+// console.log(useSelector(state=>state.item))
+
+
     return (
    <div >
       <Container >
