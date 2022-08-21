@@ -5,7 +5,7 @@ import re
 import bcrypt
 def registerControl(d):
 
-    checkMail=db.sample.find_one({"email":d['email']})
+    checkMail=db.users.find_one({"email":d['email']})
     if(checkMail):
         return "email already exist"
    
@@ -41,6 +41,7 @@ def registerControl(d):
 
              d['password']=hash_pass
              d['confirm_password']=hash_confirm_pass
+         
             
        
             
@@ -48,7 +49,7 @@ def registerControl(d):
    
 def loginControl(d):
     user={}
-    user=db.sample.find_one({"email":d['email']})
+    user=db.users.find_one({"email":d['email']})
   
     password=d["password"]
     if user is None:

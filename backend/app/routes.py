@@ -29,7 +29,8 @@ def reg():
      'name':request.json['name'],
      'email':request.json['email'],
      'password':request.json['password'],
-     'confirm_password':request.json['confirm_password']
+     'confirm_password':request.json['confirm_password'],
+     'role':0
     }
 
     statusMsg= registerControl(d)

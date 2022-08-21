@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { AccountCircleOutlined, Search,ShoppingCartTwoTone } from "@material-ui/icons";
 import { Avatar, Badge } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import ProfileDropDown from './ProfileDropDown'
+import { useSelector } from "react-redux";
+import ProfileDropDown from './ProfileDropDown'
 
 const Container = styled.div`
  
@@ -55,30 +55,28 @@ display: flex;
 /* padding-bottom: 10px; */
 `
 const Navbar = () => {
-// const cart=useSelector(state=>state.cart);
-// const{cartItems}=cart;
-// const  cartSize = Object.keys(cartItems).length;
+const cart=useSelector(state=>state.cart);
+const{cartItems}=cart;
+const  cartSize = Object.keys(cartItems).length;
 
 
-// const auth=useSelector(state=>state.auth);
-// const{user,isLogged}=auth
-
-const isLogged=true;
+const auth=useSelector(state=>state.auth);
+const{user,isLogged}=auth
 
 
-// const userLink=()=>{
+const userLink=()=>{
   
  
 
-//   return <div>
-//       <ProfileIcon>
+  return <div>
+      <ProfileIcon>
 
-//      <ProfileDropDown/>
+     <ProfileDropDown/>
   
 
-//      </ProfileIcon>
-//   </div>
-// }
+     </ProfileIcon>
+  </div>
+}
 
   return (
     <Container>
@@ -93,7 +91,8 @@ const isLogged=true;
         </Left>
 
         <Right>
-        
+        {
+          isLogged?userLink():
         <Auth>
            <RightSidebar> 
           <NavLink to='/register'><h5>REGISTER</h5></NavLink>
@@ -102,10 +101,10 @@ const isLogged=true;
           <NavLink to='/login'><h5>LOGIN</h5></NavLink>
           </RightSidebar> 
           </Auth>
-
+        }
           <RightSidebar>
      
-     <Badge badgeContent={8} color="primary">
+     <Badge badgeContent={cartSize} color="primary">
   
        <NavLink to='/cart'><ShoppingCartTwoTone fontSize="large" style = {{ marginBottom:8}}/></NavLink>
       
