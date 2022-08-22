@@ -3,9 +3,14 @@ import {
     FavoriteBorderOutlined,
   
     ShoppingCartOutlined,
-    PageviewOutlined
+    PageviewOutlined,
+    SystemUpdate,
+    ClearAll,
+    DeleteForeverOutlined,
+
   } from "@material-ui/icons";
   import { NavLink } from "react-router-dom";
+ 
   import Rating from '@material-ui/lab/Rating';
   import styled from "styled-components";
   import { useDispatch } from "react-redux";
@@ -89,8 +94,8 @@ import {
   `;
 
   const FoodList = ({ items }) => {
-  
-// console.log(useSelector(state=>state.item))
+const {isAdmin}=useSelector(state=>state.auth)
+
 
 
     return (
@@ -100,11 +105,17 @@ import {
         <Image src={items.foodImg} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined />
+          {
+            isAdmin?<SystemUpdate/>:<ShoppingCartOutlined />
+          }
+          
           </Icon>
           <Icon>
-        
-          <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id.$oid}`}><PageviewOutlined/></NavLink>
+          {
+            isAdmin? <DeleteForeverOutlined/> : <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id.$oid}`}><PageviewOutlined/></NavLink>
+          }
+         
+         
            
           </Icon>
           <Icon>

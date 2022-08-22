@@ -40,11 +40,12 @@ const loginUser=async(e)=>{
       email,
       password
     },config);
-    console.log(data);
+    // console.log(data);
 
     localStorage.setItem('userinfo',JSON.stringify(data));
     setStatus(200);
     dispatch(dispatchLogin())
+    dispatch({type:'userinfo',payload:data})
 
     if(data){
       toast.success('LOG IN SUCCESS',{

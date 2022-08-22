@@ -54,8 +54,10 @@ def login():
     statusMsg= loginControl(d)
 
     if(statusMsg=="ok"): 
-        # db.sample.insert_one(d)
-        return "success",200 
+        cursor=db.users.find_one({"email":d['email']})
+        cursor=json.loads(json_util.dumps(cursor))
+    # print(cursor)
+        return jsonify(cursor)
     else:
         return  statusMsg,400  
 

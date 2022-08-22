@@ -105,6 +105,7 @@ const userLink=()=>{
           <RightSidebar>
      
      <Badge badgeContent={cartSize} color="primary">
+     <NavLink to='/sample'>sample</NavLink>
   
        <NavLink to='/cart'><ShoppingCartTwoTone fontSize="large" style = {{ marginBottom:8}}/></NavLink>
       
