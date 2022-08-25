@@ -33,7 +33,7 @@ export default function SimpleMenu() {
   const{user}=auth;
   const handleLogout = async () => {
     try {
-        await axios.get('/logout')
+        // await axios.get('/logout')
         localStorage.removeItem('userinfo')
         window.location.href = "/";
     } catch (err) {
@@ -53,6 +53,7 @@ export default function SimpleMenu() {
       
       <Avatar alt={user.name} src={user.Avatar}  />
       </Button>
+
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -61,11 +62,11 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
        
-    
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}> <NavLink to='/'  onClick={handleLogout}>LOGOUT</NavLink></MenuItem>
       </Menu>
+
       </Container>
     </div>
   );

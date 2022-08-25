@@ -7,8 +7,19 @@ import FoodMenu from './components/RestaurantItem/FoodMenu'
 import Home from './components/Home'
 import SingleFood from './components/singleFoodpage/singleFood'
 import Cart from './components/Cart/Cart'
-// import FormDailog from './components/PopUpDailog/FormDailog'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { dispatchLogin } from './components/redux/action/authAction'
+
 const App = () => {
+  const dispatch=useDispatch();
+  const data=JSON.parse(localStorage.getItem('userinfo'));
+  console.log(data)
+  if(data){
+    dispatch(dispatchLogin())
+    dispatch({type:'userinfo',payload:data})
+  }
+
   return (
    <>
    <Navbar/>
