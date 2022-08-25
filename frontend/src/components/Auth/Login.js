@@ -43,6 +43,8 @@ const loginUser=async(e)=>{
     // console.log(data);
 
     localStorage.setItem('userinfo',JSON.stringify(data));
+    const lsData=localStorage.getItem('userinfo')
+    console.log(lsData)
     setStatus(200);
     dispatch(dispatchLogin())
     dispatch({type:'userinfo',payload:data})

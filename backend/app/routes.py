@@ -160,10 +160,25 @@ def getSearchFood(foodRestId,foodName):
 def getSingleFood(id):
     
     id=ObjectId(id)
-    print(id)
-    print(type(id))
+    # print(id)
+    # print(type(id))
     cursor=db.foods.find_one({'_id':id});
     cursor=json.loads(json_util.dumps(cursor))
     # print(cursor)
 
     return cursor
+
+ #admin foods crud
+
+@app.route('/deleteSingleFood/<string:id>/<string:foodRestId>',methods=['GET'])
+
+def deleteSingleFood(id,foodRestId):
+    
+    id=ObjectId(id)
+  
+    db.foods.delete_one({'_id':id});
+    cursor=db.foods.find({'foodRestId':foodRestId})
+    cursor=json.loads(json_util.dumps(cursor))
+    l=list(cursor)  
+  
+    return jsonify(l) 

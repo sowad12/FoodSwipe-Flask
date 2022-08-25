@@ -15,6 +15,8 @@ import {
   import styled from "styled-components";
   import { useDispatch } from "react-redux";
   import { useSelector } from "react-redux";
+import { useState } from "react";
+import FormDailog from "../PopUpDailog/FormDailog";
   
   const Info = styled.div`
     opacity: 0;
@@ -95,24 +97,35 @@ import {
 
   const FoodList = ({ items }) => {
 const {isAdmin}=useSelector(state=>state.auth)
+const[Id,setId]=useState('');
+const dispatch=useDispatch();
 
 
+const deleteItem=(items)=>{
+
+dispatch({type:'foodDelete',payload:items})
+ 
+}
 
     return (
    <div >
       <Container >
         {/* <Circle /> */}
+       
         <Image src={items.foodImg} />
         <Info>
           <Icon>
           {
-            isAdmin?<SystemUpdate/>:<ShoppingCartOutlined />
+            isAdmin?FormDailog():<ShoppingCartOutlined />
           }
           
           </Icon>
+
           <Icon>
           {
-            isAdmin? <DeleteForeverOutlined/> : <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id.$oid}`}><PageviewOutlined/></NavLink>
+           
+          
+            isAdmin? <DeleteForeverOutlined  onClick={()=>deleteItem(items)} /> : <NavLink to={`/SingleFood/${items.foodRestId}/${items.foodName}/${items._id.$oid}`}><PageviewOutlined/></NavLink>
           }
          
          
@@ -127,9 +140,11 @@ const {isAdmin}=useSelector(state=>state.auth)
       <CardContainer>
       <p ><b color="green">{items.foodName}</b></p>
       <p><b>Price:{items.foodPrice}</b></p>
+      {/* <p> {items._id.$oid}</p> */}
       <Rating name="size-medium" value={items.foodRating} />
   </CardContainer>
       </Card>
+  
       </div>  
         
     );

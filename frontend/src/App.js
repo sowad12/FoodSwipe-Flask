@@ -7,7 +7,7 @@ import FoodMenu from './components/RestaurantItem/FoodMenu'
 import Home from './components/Home'
 import SingleFood from './components/singleFoodpage/singleFood'
 import Cart from './components/Cart/Cart'
-
+// import FormDailog from './components/PopUpDailog/FormDailog'
 const App = () => {
   return (
    <>
@@ -19,6 +19,7 @@ const App = () => {
    <Route path="login" element={<Login />} />
    <Route path="/SingleFood/:foodRestId/:foodName/:id" element={<SingleFood/>} />
    <Route path="/cart" element={<Cart/>} />
+   {/* <Route path="adminFoodupdate" element={<FormDailog/>}/> */}
    </Routes>
 
     </> 
