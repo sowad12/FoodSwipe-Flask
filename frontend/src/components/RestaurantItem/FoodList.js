@@ -116,7 +116,7 @@ dispatch({type:'foodDelete',payload:items})
         <Info>
           <Icon>
           {
-            isAdmin?FormDailog():<ShoppingCartOutlined />
+            isAdmin?FormDailog(items):<ShoppingCartOutlined />
           }
           
           </Icon>

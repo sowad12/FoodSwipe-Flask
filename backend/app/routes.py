@@ -1,4 +1,5 @@
 
+
 import json
 
 import bson.json_util as json_util
@@ -177,8 +178,37 @@ def deleteSingleFood(id,foodRestId):
     id=ObjectId(id)
   
     db.foods.delete_one({'_id':id});
+
     cursor=db.foods.find({'foodRestId':foodRestId})
     cursor=json.loads(json_util.dumps(cursor))
     l=list(cursor)  
   
     return jsonify(l) 
+
+@app.route('/updateFood/<string:id>',methods=['PUT'])   
+
+def updateFood(id):
+    d=dict()
+    d={
+      'foodName':request.json['foodName'],
+      'foodPrice':request.json['foodPrice'],  
+      'foodRating':int(request.json['foodRating']),
+      'foodStock':int(request.json['foodStock'])
+    }
+    # print(d)
+    id=ObjectId(id)
+    prev_cursor={"_id":id};
+  
+    new_cursor={ "$set": {
+         "foodName": d["foodName"].capitalize(),
+         "foodPrice": d["foodPrice"],
+         "foodRating": d["foodRating"],
+         "foodStock": d["foodStock"],
+         
+          } };
+
+
+    db.foods.update_one(prev_cursor,new_cursor)
+    
+
+    return "update success"

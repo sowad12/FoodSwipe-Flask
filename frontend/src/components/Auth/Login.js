@@ -29,6 +29,7 @@ const dispatch=useDispatch()
 
 const loginUser=async(e)=>{
   e.preventDefault();
+  
   try{
     const config={
       headers:{
@@ -46,6 +47,7 @@ const loginUser=async(e)=>{
 
     setStatus(200);
     dispatch(dispatchLogin())
+    
     dispatch({type:'userinfo',payload:data})
 
     if(data){
