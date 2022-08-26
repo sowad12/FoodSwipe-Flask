@@ -185,6 +185,33 @@ def deleteSingleFood(id,foodRestId):
   
     return jsonify(l) 
 
+
+@app.route('/insertFood/<string:foodRestId>',methods=['POST'])   
+
+def insertFood(foodRestId):
+    d=dict()
+   
+    d={
+      'foodRestId':foodRestId,
+      'foodName':request.json['foodName'],
+      'foodPrice':request.json['foodPrice'],  
+      'foodRating':int(request.json['foodRating']),
+      'foodStock':int(request.json['foodStock']),
+      'foodCategory':request.json['foodCategory'],
+      'foodImg':request.json['foodImg'],
+      'foodDescription':'awesome food'
+    }
+    print(d)
+    db.foods.insert_one(d)
+
+
+    # db.foods.update_one(prev_cursor,new_cursor)
+    
+
+    return "insert success",200
+
+
+
 @app.route('/updateFood/<string:id>',methods=['PUT'])   
 
 def updateFood(id):
@@ -193,7 +220,8 @@ def updateFood(id):
       'foodName':request.json['foodName'],
       'foodPrice':request.json['foodPrice'],  
       'foodRating':int(request.json['foodRating']),
-      'foodStock':int(request.json['foodStock'])
+      'foodStock':int(request.json['foodStock']),
+       'foodImg':request.json['foodImg'],
     }
     # print(d)
     id=ObjectId(id)
@@ -204,6 +232,7 @@ def updateFood(id):
          "foodPrice": d["foodPrice"],
          "foodRating": d["foodRating"],
          "foodStock": d["foodStock"],
+         "foodImg":d["foodImg"]
          
           } };
 
@@ -211,4 +240,4 @@ def updateFood(id):
     db.foods.update_one(prev_cursor,new_cursor)
     
 
-    return "update success"
+    return "update success",200

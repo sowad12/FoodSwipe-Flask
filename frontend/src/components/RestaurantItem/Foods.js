@@ -174,16 +174,7 @@ const{deleteId,restId}=useSelector(state=>state.foodCrud)
       {foods.map((item,pos) => (
         <FoodList items={item} key={pos} />
       ))}
-      <Left>
-      <Icon>
-      {
-        isAdmin? <Add style={{ fontSize: 90 }}></Add>:'' 
-      }
-       
- 
   
-      </Icon>
-      </Left>
   
 
     </Container>

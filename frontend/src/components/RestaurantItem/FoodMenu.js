@@ -1,12 +1,14 @@
 import React,{useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Searchbar from "../Filter/Searchbar/Searchbar";
 import Foods from "./Foods";
 import Footer from "../Footer/Footer";
-import { Checkbox,  FormControlLabel, FormGroup} from '@material-ui/core'
+import { Checkbox,  FormControlLabel, FormGroup, Hidden} from '@material-ui/core'
 import { useLocation } from "react-router-dom";
 import CheckFilter from "../Filter/LeftSidebar/CheckFilter";
+import FoodInsertForm from "../PopUpDailog/FoodInsertForm";
+import { Add } from "@material-ui/icons";
 
 const Container = styled.div``;
 
@@ -22,12 +24,13 @@ const Title = styled.h2`
 
 const FilterContainer = styled.div`
   display: flex;
-  /* justify-content: space-between; */
+
 `;
 
 const Filter = styled.div`
   margin: 20px;
   padding-right: 50px;
+ 
 `;
 
 const FilterText = styled.span`
@@ -35,9 +38,13 @@ const FilterText = styled.span`
   font-weight: 600;
   margin-right: 20px;
   padding-left:130px ;
+  align-items: flex-end;
+  justify-content: flex-end;
 `;
+//  padding-left: 1120px; 
 const BoxFilter=styled.div`
- padding-left: 1120px;
+padding-left: 92vh
+
 `
 const Select = styled.select`
   padding: 10px;
@@ -47,6 +54,18 @@ const Option = styled.option``;
 /* const ListItem=styled.div`
 padding-top: 20px;
 `; */
+
+const Head=styled.div`
+display:flex;
+
+
+`
+const AddItems=styled.div`
+display:flex;
+padding-left:30px;
+jusitfy-content:space-between
+`
+
 const FoodMenu = () => {
   const dispatch=useDispatch();
   const location=useLocation();
@@ -61,6 +80,8 @@ const FoodMenu = () => {
 //     [e.target.name]:value
 //   })
 //  }
+
+const {isAdmin}=useSelector(state=>state.auth)
  const SortPriceHandler=(e)=>{
     // console.log(e.target.value) 
    dispatch({type:'SortPrice',payload:e.target.value})
@@ -91,7 +112,24 @@ const FoodMenu = () => {
         </FormGroup>
         </Filter>
 
+
+
+
+           
+       
         <Filter>
+        <Head>
+        <AddItems>
+        {
+         isAdmin?<h4  style={{paddingTop:"15px",color:"red"}}>ADD ITEMS:</h4>:<h4  style={{paddingTop:"15px",color:"red",visibility : "hidden"}}>ADD ITEMS:</h4>
+        }
+       
+        {
+          isAdmin? 
+FoodInsertForm(RestaurantName): <Add   style={{ fontSize: "45px",color:"grey",visibility : "hidden"}}  />
+        }
+
+  </AddItems>
         <BoxFilter>
         <FilterText>SORT BY(PRICE):</FilterText>
           <Select name="PRICE" onChange={SortPriceHandler} >
@@ -100,8 +138,10 @@ const FoodMenu = () => {
             <Option value="desc">HIGH-LOW</Option>
           </Select>
         </BoxFilter>
+        </Head>
           <Foods  />
         </Filter>
+    
       </FilterContainer>
       <Footer />
     </Container>
