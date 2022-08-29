@@ -55,7 +55,8 @@ const [open,setOpen]=useState(false);
     setStatus(200);
   
     // window.alert("Registration Success");
-    navigate(`/RestaurantMenu/${items.foodRestId}`);
+    // navigate(`/RestaurantMenu/${items.foodRestId}`);
+    window.location.reload();
    
   }catch(err){
     console.log(err)

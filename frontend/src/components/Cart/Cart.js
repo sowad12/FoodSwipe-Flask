@@ -179,7 +179,7 @@ const Cart = () => {
   const dispatch=useDispatch();
   const cart=useSelector(state=>state.cart)
   // console.log(cart)
-  const{cartItems}=cart;
+  const{cartItems,totalPrice}=cart;
   const[rangeItem,setRangeItem]=useState([]);
   const[quantity,setQuantity]=useState(1);
 // const toalPrice=100
@@ -201,7 +201,7 @@ const Cart = () => {
     // };
 
 
-  // console.log(cartItems)
+  console.log(totalPrice)
 // var size = Object.keys(cartItems).length;
 // var filtercartItems =  cartItems.filter(item => item.product!==undefined);
 //  console.log(filtercartItems )
@@ -235,10 +235,8 @@ const Cart = () => {
                   <ProductId>
                     <b>ID:</b>{item.product}
                   </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
+            
+                 
                 </Details>
               </ProductDetail>
               <PriceDetail>
@@ -266,38 +264,26 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              {/* <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice> */}
-               <SummaryItemPrice>100000000</SummaryItemPrice> 
+             
+               <SummaryItemPrice>{totalPrice} TK </SummaryItemPrice> 
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
+              <SummaryItemPrice> 20 TK</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
+              <SummaryItemPrice> -10 TK</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>{totalPrice} TK </SummaryItemPrice>
             </SummaryItem>
-            {/* <Strip>
-            <StripeCheckout
-        
-              name="FoodSwipe"
-              image="https://res.cloudinary.com/cse347/image/upload/v1650646049/FoodSwipe/277916694_424414652779262_4711146425304990146_n_foza7j.png"
-              billingAddress
-              shippingAddress
-              description={`Your total is $${totalPrice}`}
-              amount={totalPrice * 100}
-              token={onToken}
-              stripeKey={KEY}
-           
-            > */}
-              <Button >CHECKOUT NOW</Button>
+            {
+              totalPrice?<Button> <NavLink to='/payment'> ORDER</NavLink></Button>:<Button >ORDER</Button>
+            }
+          
      
-            {/* </StripeCheckout>
-            </Strip> */}
           </Summary>
         </Bottom>
       </Wrapper>

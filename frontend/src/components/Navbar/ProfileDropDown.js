@@ -30,7 +30,7 @@ export default function SimpleMenu() {
     setAnchorEl(null);
   };
   const auth=useSelector(state=>state.auth)
-  const{user}=auth;
+  const{user,isAdmin}=auth;
   const handleLogout = async () => {
     try {
         // await axios.get('/logout')
@@ -62,9 +62,10 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
        
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}> <NavLink to='/'  onClick={handleLogout}>LOGOUT</NavLink></MenuItem>
+        <MenuItem onClick={handleClose}><NavLink to='userProfile'><h5>Profile</h5></NavLink></MenuItem>
+        <MenuItem onClick={handleClose}><h5>History</h5></MenuItem>
+        <MenuItem onClick={handleClose}><NavLink to='/adminDashboard'><h5>Dashboard</h5></NavLink></MenuItem>
+        <MenuItem onClick={handleClose}> <NavLink to='/'  onClick={handleLogout}><h5>Logout</h5></NavLink></MenuItem>
       </Menu>
 
       </Container>

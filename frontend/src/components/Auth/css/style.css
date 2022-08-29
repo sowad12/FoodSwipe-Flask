@@ -24,12 +24,14 @@
 }
 
 .container{
-    width: 100vw;
+
+    width: 150vw;
     height: 70vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap :7rem;
     padding: 0 2rem;
+	margin-left: 70vh;
 }
 
 .img{

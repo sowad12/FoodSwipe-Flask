@@ -2,6 +2,9 @@
 
 import json
 
+import os
+import stripe
+
 import bson.json_util as json_util
 
 from bson.objectid import ObjectId
@@ -193,7 +196,7 @@ def insertFood(foodRestId):
    
     d={
       'foodRestId':foodRestId,
-      'foodName':request.json['foodName'],
+      'foodName':request.json['foodName'].capitalize(),
       'foodPrice':request.json['foodPrice'],  
       'foodRating':int(request.json['foodRating']),
       'foodStock':int(request.json['foodStock']),
@@ -241,3 +244,44 @@ def updateFood(id):
     
 
     return "update success",200
+
+# payment gateway
+app.config['STRIPE_PUBLIC_KEY']='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
+app.config['STRIPE_SECRET_KEY']='sk_test_51KrNyDEYl23s23aN2Jk8BKn6GUttvsAyejKiseY1BQvFkykrg7eUUw4aCRqBtL48DTzmBRecuWUmx8c3hVrSkuNW00hm3iWY1H'
+stripe.api_key = app.config['STRIPE_SECRET_KEY']
+# price_1LbqGaEYl23s23aNyz0dIjzE
+YOUR_DOMAIN = 'http://localhost:3000'
+@app.route('/create-checkout-session', methods=['POST'])
+
+
+
+def create_checkout_session():
+
+    # line_items_list=[]
+    # line_item={}
+    # line_item["name"] = 'lol'
+    # line_item["description"] = 'awesome'
+    # line_item["amount"] = '100'
+    # line_item["currency"] = "usd"
+    # line_item["id"] = "price_1Lbijw2eZvKYlo2CbOBd3anY",
+    # line_item["quantity"] =1
+    # line_items_list.append(dict(line_item))
+
+    try:
+          checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': 'price_1LbqGaEYl23s23aNyz0dIjzE',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '?success=true',
+            cancel_url=YOUR_DOMAIN + '?canceled=true',
+        )
+
+    except Exception as e:
+        return str(e)
+     
+    return redirect(checkout_session.url, code=303)

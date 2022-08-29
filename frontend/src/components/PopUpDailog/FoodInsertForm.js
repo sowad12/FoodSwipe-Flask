@@ -62,7 +62,7 @@ const [open,setOpen]=useState(false);
     setStatus(200);
   
     // window.alert("Registration Success");
-    navigate(`/RestaurantMenu/${RestaurantName}`);
+    window.location.reload();
    
   }catch(err){
     console.log(err)
