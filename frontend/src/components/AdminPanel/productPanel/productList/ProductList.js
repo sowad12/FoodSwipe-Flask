@@ -1,15 +1,18 @@
 // import "./productList.css";
+import React from 'react'
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import ProductData from './ProductData';
 
-import React from 'react'
+
 
 const ProductList = () => {
   return (
     <>
+   <ProductData/>
     <style
       dangerouslySetInnerHTML={{
         __html:
@@ -17,10 +20,7 @@ const ProductList = () => {
       }}
     />
     <h2>Zebra Striped Table</h2>
-    <p>
-      For zebra-striped tables, use the nth-child() selector and add a
-      background-color to all even (or odd) table rows:
-    </p>
+   
     <table>
       <tbody>
         <tr>

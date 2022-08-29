@@ -1,5 +1,4 @@
 
-
 import json
 
 import os
@@ -25,7 +24,7 @@ def home():
 def about():
     return "<h1>about us</h1>"
 
-
+#user profile registration,login,update
 @app.route('/registration',methods=['POST'])   
 def reg():
     d=dict()
@@ -65,29 +64,18 @@ def login():
     else:
         return  statusMsg,400  
 
-#Restaurant data
-# @app.route('/PostRest',methods=['POST'])   
-# def restaurantPost():
+# @app.route('/userProfile/<string:userId>/',methods=['PUT'])
+# def userProfile(userId):
 #     d=dict()
 #     d={
-#      'RestId':request.json['RestId'],
-#      'RestName':request.json['RestName'],
-#      'RestEmail':request.json['RestEmail'],
-#     'RestLocation':request.json['RestLocation'],
-#     'RestDescription':request.json['RestDescription'],
-#     'RestRating':request.json['RestRating'],
-#     # 'RestImg':request.json[ 'RestImg'],
-
+#      'name':request.json['name'],
+#      'email':request.json['email'],
+#      'password':request.json['password'],
+#      'confirm_password':request.json['confirm_password'],
+#      'role':0
 #     }
 
-    # statusMsg= loginControl(d)
-
-    # if(statusMsg=="ok"): 
-    #     # db.sample.insert_one(d)
-    #     return "success",200 
-    # else:
-    #     return  statusMsg,400      
-
+#Restaurant list and foods
 @app.route('/getAllRest',methods=['GET'])
 def getALLRest():
     l=list(db.restaurants.find({},{'_id':0}))
@@ -245,18 +233,44 @@ def updateFood(id):
 
     return "update success",200
 
+
+#admin panel backend
+
+@app.route('/adminDashboard',methods=['GET'])
+def total():
+    
+    d=dict()
+  
+    c1=db.users.count_documents({})
+    c2=db.foods.count_documents({})
+    c3=db.restaurants.count_documents({})
+    d['TotalUsers']=c1
+    d['TotalFoods']=c2
+    d['TotalRest']=c3
+  
+    return d,200
+
+
+@app.route('/AdminproductList',methods=['GET'])
+def getAllAdminFoods():
+
+    cursor=db.foods.find({})
+    cursor=json.loads(json_util.dumps(cursor))
+    # print(cursor)
+
+
+    return jsonify(cursor)
+
+
 # payment gateway
-app.config['STRIPE_PUBLIC_KEY']='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
-app.config['STRIPE_SECRET_KEY']='sk_test_51KrNyDEYl23s23aN2Jk8BKn6GUttvsAyejKiseY1BQvFkykrg7eUUw4aCRqBtL48DTzmBRecuWUmx8c3hVrSkuNW00hm3iWY1H'
-stripe.api_key = app.config['STRIPE_SECRET_KEY']
-# price_1LbqGaEYl23s23aNyz0dIjzE
-YOUR_DOMAIN = 'http://localhost:3000'
 @app.route('/create-checkout-session', methods=['POST'])
-
-
 
 def create_checkout_session():
 
+    app.config['STRIPE_PUBLIC_KEY']='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
+    app.config['STRIPE_SECRET_KEY']='sk_test_51KrNyDEYl23s23aN2Jk8BKn6GUttvsAyejKiseY1BQvFkykrg7eUUw4aCRqBtL48DTzmBRecuWUmx8c3hVrSkuNW00hm3iWY1H'
+    stripe.api_key = app.config['STRIPE_SECRET_KEY']
+    YOUR_DOMAIN = 'http://localhost:3000'
     # line_items_list=[]
     # line_item={}
     # line_item["name"] = 'lol'

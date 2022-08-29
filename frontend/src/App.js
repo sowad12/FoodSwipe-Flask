@@ -20,7 +20,7 @@ import { dispatchLogin } from './components/redux/action/authAction'
 const App = () => {
   const dispatch=useDispatch();
   const data=JSON.parse(localStorage.getItem('userinfo'));
-  console.log(data)
+  // console.log(data)
   if(data){
     dispatch(dispatchLogin())
     dispatch({type:'userinfo',payload:data})

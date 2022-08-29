@@ -13,6 +13,7 @@
   cursor: pointer;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  background-color: #B6E097;
 }
 
 .featuredTitle{
@@ -23,6 +24,7 @@
     margin: 10px 0px;
     display: flex;
     align-items: center;
+
 }
 
 .featuredMoney{
@@ -48,5 +50,5 @@
 
 .featuredSub{
     font-size: 15px;
-    color: gray;
+    color: black;
 }
