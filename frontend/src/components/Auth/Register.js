@@ -16,6 +16,7 @@ const[name,setName]=useState('');
 const[email,setEmail]=useState('');
 const[password,setPassword]=useState('');
 const[confirm_password,setConfirm_password]=useState('');
+const[phone,setPhone]=useState('');
 const[error,setError]=useState(' ');
 const[status,setStatus]=useState(' ');
 
@@ -46,7 +47,8 @@ const registerUser=async(e)=>{
       name,
       email,
       password,
-      confirm_password
+      confirm_password,
+      phone
     },config);
     // console.log(data);
     // console.log(data.status)
@@ -157,6 +159,24 @@ const registerUser=async(e)=>{
               />
           </div>
         </div>
+        <div className="input-div pass">
+          <div className="i">
+            <i className="fas fa-lock" />
+          </div>
+          <div className="div">
+            {/* <h5>Password</h5> */}
+            <input 
+            name='phone'
+            id="phone"
+            type="phone"
+             className="input" 
+              placeholder='Phone'
+              value={phone}
+              onChange={(e)=>setPhone(e.target.value)}
+              />
+          </div>
+        </div>
+        
         <br />
         <input type="submit" className="btn" value="Register"/>
         <div className='sample'>

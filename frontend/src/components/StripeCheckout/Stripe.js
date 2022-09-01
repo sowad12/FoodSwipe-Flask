@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import Cart from '../Cart/Cart'
 import './Stripe.css'
-const ProductDisplay = () => (
-    <section>
-      <div className="stripeproduct">
-        <img
-          src="https://i.imgur.com/EHyR2nP.png"
-          alt="The cover of Stubborn Attachments"
-        />
-        <div className="stripedescription">
-        <h3>Stubborn Attachments</h3>
-        <h5>$20.00</h5>
-        </div>
-      </div>
-    
-      <form action="http://localhost:5000/create-checkout-session" method="POST">
-        <button type="submit">
-          Checkout
-        </button>
-      </form>
-    </section>
-  );
+
 
   const Message = ({ message }) => (
     <section>
@@ -28,6 +11,10 @@ const ProductDisplay = () => (
   );
 
 const Stripe = () => {
+
+  const cart=useSelector(state=>state.cart)
+  // console.log(cart)
+  const{cartItems,totalPrice}=cart;
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -47,7 +34,7 @@ const Stripe = () => {
   return message ? (
     <Message message={message} />
   ) : (
-    <ProductDisplay />
+    <Cart/>
   );
 }
 

@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import { useDispatch,useSelector } from 'react-redux';
 // import {removeFromCart} from '../redux/actions/shoppingCartAction'
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import Stripe from '../StripeCheckout/Stripe';
+
 // import cartItems from './data';
 // import StripeCheckout from 'react-stripe-checkout';
+
 const KEY='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
 
 
@@ -201,7 +203,7 @@ const Cart = () => {
     // };
 
 
-  console.log(totalPrice)
+  // console.log(totalPrice)
 // var size = Object.keys(cartItems).length;
 // var filtercartItems =  cartItems.filter(item => item.product!==undefined);
 //  console.log(filtercartItems )
@@ -280,7 +282,12 @@ const Cart = () => {
               <SummaryItemPrice>{totalPrice} TK </SummaryItemPrice>
             </SummaryItem>
             {
-              totalPrice?<Button> <NavLink to='/payment'> ORDER</NavLink></Button>:<Button >ORDER</Button>
+            totalPrice? <form action="http://localhost:5000/create-checkout-session/${totalPrice}" method="POST">
+        <Button type="submit" >
+          Checkout
+        </Button>
+      </form>
+            :<Button >Checkout</Button>
             }
           
      

@@ -33,6 +33,7 @@ def reg():
      'email':request.json['email'],
      'password':request.json['password'],
      'confirm_password':request.json['confirm_password'],
+     'phone':request.json['phone'],
      'role':0
     }
 
@@ -64,16 +65,32 @@ def login():
     else:
         return  statusMsg,400  
 
-# @app.route('/userProfile/<string:userId>/',methods=['PUT'])
-# def userProfile(userId):
-#     d=dict()
-#     d={
-#      'name':request.json['name'],
-#      'email':request.json['email'],
-#      'password':request.json['password'],
-#      'confirm_password':request.json['confirm_password'],
-#      'role':0
-#     }
+@app.route('/userProfile/<string:userId>',methods=['PUT'])   
+
+def userProfile(userId):
+    print(userId)
+    d=dict()
+    d={
+     'name':request.json['name'],
+     'email':request.json['email'],
+     'phone':request.json['phone']
+
+    }
+    print(d)
+    id=ObjectId(userId)
+    prev_cursor={"_id":id};
+  
+    new_cursor={ "$set":d};
+
+
+    db.users.update_one(prev_cursor,new_cursor)
+    
+
+    return "update success",200
+
+@app.route('/lol',methods=['GET'])
+def lol():
+    return "hello"
 
 #Restaurant list and foods
 @app.route('/getAllRest',methods=['GET'])
@@ -263,9 +280,9 @@ def getAllAdminFoods():
 
 
 # payment gateway
-@app.route('/create-checkout-session', methods=['POST'])
+@app.route('/create-checkout-session/<string:totalPrice>', methods=['POST'])
 
-def create_checkout_session():
+def create_checkout_session(totalPrice):
 
     app.config['STRIPE_PUBLIC_KEY']='pk_test_51KrNyDEYl23s23aNkwOsrUaOMRChU9HJ6xvYclcgFTC94S8HgEbxof7wyqSwq1CiwE1c2plnxnwmAsgxWFWXIlwc00q8Gu6Zwt'
     app.config['STRIPE_SECRET_KEY']='sk_test_51KrNyDEYl23s23aN2Jk8BKn6GUttvsAyejKiseY1BQvFkykrg7eUUw4aCRqBtL48DTzmBRecuWUmx8c3hVrSkuNW00hm3iWY1H'

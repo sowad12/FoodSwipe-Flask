@@ -1,66 +1,124 @@
 // import "./productList.css";
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { Clear, DeleteOutline, Edit, EditAttributesOutlined, EditOutlined } from "@material-ui/icons";
 import { productRows } from "../../dummyData";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import ProductData from './ProductData';
+import axios from 'axios';
+// import ProductData from './ProductData';
 
 
 
 const ProductList = () => {
-  return (
-    <>
-   <ProductData/>
-    <style
-      dangerouslySetInnerHTML={{
-        __html:
-          "\ntable {\n  border-collapse: collapse;\n  width: 100%;\n}\n\nth, td {\n  text-align: left;\n  padding: 8px;\n}\n\ntr:nth-child(even) {\n  background-color: #D6EEEE;\n}\n"
-      }}
-    />
-    <h2>Zebra Striped Table</h2>
-   
-    <table>
-      <tbody>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Points</th>
-        </tr>
-        <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
-          <td>$100</td>
-        </tr>
-        <tr>
-          <td>Lois</td>
-          <td>Griffin</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>Joe</td>
-          <td>Swanson</td>
-          <td>$300</td>
-        </tr>
-        <tr>
-          <td>Cleveland</td>
-          <td>Brown</td>
-          <td>$250</td>
-        </tr>
-        <tr>
-          <td>Cleveland</td>
-          <td>Brown</td>
-          <td>$250</td>
+  const columns = [
+    { field: 'ID', 
+    headerName: 'ID',
+     width: 250,
   
-        </tr>
+    },
+    { field: 'Restaurant', 
+    headerName: 'Restaurant',
+     width: 250,
+  
+    },
+    {
+      field: 'ProductName',
+      headerName: 'Product Name',
+      width: 250,
+      editable: true,
+    },
+    {
+      field: 'ProductPrice',
+      headerName: 'Product Price',
+      width: 250,
+      editable: true,
+    },
+    {
+      field: 'ProductStock',
+      headerName: 'Product Stock',
+      width: 250,
+      editable: true,
+    },
+    {
+      field: 'ProductRating',
+      headerName: 'Product Rating',
+      width: 250,
+      editable: true,
+      
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 250,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+          return (
+              <div  style={{ cursor: "pointer" }}>
+                  <EditOutlined style={{ color: "green",marginLeft:"20" }}/>
+                 
+                  <Clear style={{ color: "red",marginLeft:"20" }} />
+               </div>
+          );
+       }
+    }
+      
+  ];
+  
+  
+
+  const [productData,setproductData]=useState([])
+
+    useEffect(()=>{
+     const adminProducts=async()=>{
+     try{
+    const config={
+     headers:{
+        "Content-Type": "application/json"
+     }
+    }
+    const {data}= await axios.get("http://localhost:5000/AdminproductList",config);
+
+ setproductData(data)
+     }catch(e){
+console.log(e)
+
+     }
+     }
+     adminProducts()
+    },[])
+  // console.log(pro)
+let c=0;
+  const rows=productData.map((obj)=>{
+  //  console.log(obj)
+  c++;
+    return{
+      ID:c,
+      Restaurant:obj.foodRestId,
+      ProductName:obj.foodName,
+      ProductPrice:obj.foodPrice,
+      ProductStock:obj.foodStock,
+      ProductRating:obj.foodRating,
+     
+      id:obj._id.$oid,
+     
+    }
     
-      </tbody>
-    </table>
-  </>
-  
-  
-  )
+  })
+
+  return(
+  <div style={{ height: 800, width: '100%' }}>
+  <h1>ALL RESTAURANTS PRODUCT LIST</h1>
+      <DataGrid 
+        rows={rows}
+        columns={columns}
+        pageSize={10}
+        checkboxSelection
+        disableSelectionOnClick
+      />
+    </div>
+    )
 }
 
 export default ProductList

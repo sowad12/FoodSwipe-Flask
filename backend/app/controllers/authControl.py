@@ -30,6 +30,9 @@ def registerControl(d):
         if(len(d['confirm_password'])<6):
             return "password at least 6 character long"  
 
+        if(len(d['phone'])!=11):
+            return "Phone number must be 11 digits"      
+
         if  (password != confirm_password):
             return "password is not match"  
 
