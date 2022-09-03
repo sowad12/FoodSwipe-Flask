@@ -6,7 +6,7 @@ import { Avatar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+
 
 const Container=styled.div`
 
@@ -66,7 +66,10 @@ export default function SimpleMenu() {
        
         <MenuItem onClick={handleClose}><NavLink to={`userProfile/${user._id.$oid}`}><h5>Profile</h5></NavLink></MenuItem>
         <MenuItem onClick={handleClose}><h5>History</h5></MenuItem>
-        <MenuItem onClick={handleClose}><NavLink to='/adminDashboard'><h5>Dashboard</h5></NavLink></MenuItem>
+        <MenuItem onClick={handleClose}>{
+          isAdmin?<NavLink to='/adminDashboard'><h5>Dashboard</h5></NavLink>:''
+        }</MenuItem>
+        
         <MenuItem onClick={handleClose}> <NavLink to='/'  onClick={handleLogout}><h5>Logout</h5></NavLink></MenuItem>
       </Menu>
 

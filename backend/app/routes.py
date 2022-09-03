@@ -1,6 +1,5 @@
 
 import json
-
 import os
 import stripe
 
@@ -12,6 +11,7 @@ from app import *
 from .controllers.authControl import *
 
 from flask_cors import CORS
+
 
 
 CORS(app)
@@ -197,6 +197,7 @@ def deleteSingleFood(id,foodRestId):
 @app.route('/insertFood/<string:foodRestId>',methods=['POST'])   
 
 def insertFood(foodRestId):
+ 
     d=dict()
    
     d={
@@ -206,15 +207,16 @@ def insertFood(foodRestId):
       'foodRating':int(request.json['foodRating']),
       'foodStock':int(request.json['foodStock']),
       'foodCategory':request.json['foodCategory'],
+
       'foodImg':request.json['foodImg'],
       'foodDescription':'awesome food'
     }
-    print(d)
+   
+    # print(d)
     db.foods.insert_one(d)
 
 
-    # db.foods.update_one(prev_cursor,new_cursor)
-    
+
 
     return "insert success",200
 

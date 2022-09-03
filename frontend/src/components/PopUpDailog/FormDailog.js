@@ -72,11 +72,18 @@ display:flex;
 justify-content:center
 
 `
-  const imageHandler=(e)=>{
-    e.preventDefault();
-    SetfoodImg(URL.createObjectURL( e.target.files[0]))
-  }
-  
+const imageHandler=(e)=>{
+  e.preventDefault();
+  const file = e.target.files[0];
+  const fileReader = new FileReader();
+  fileReader.onload = () => {
+    // console.log(fileReader.result.toString());  
+    SetfoodImg(fileReader.result.toString());
+
+  };
+ fileReader.readAsDataURL(file)
+
+}
 
   return (
  <>
@@ -102,7 +109,8 @@ justify-content:center
       />
       <ButtonTag>
  
-  <input type='file' accept="image/*"  onChange={imageHandler}/>
+      <input type='file' accept="image/*"  onChange={(e)=>{
+    imageHandler(e)}}/>
 
 
   </ButtonTag>

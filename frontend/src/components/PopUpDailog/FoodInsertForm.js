@@ -17,7 +17,7 @@ const[foodStock,SetfoodStock]=useState('');
 const[foodRating,SetfoodRating]=useState(''); 
 const[foodCategory,SetfoodCategory]=useState(''); 
 const[foodImg,SetfoodImg]=useState('https://res.cloudinary.com/cse347/image/upload/v1661514247/FoodSwipe/vector-empty-transparent-background-transparency-grid-seamless-pattern-171149540_ezgfv0.jpg')
-
+const [baseImage, setBaseImage] = useState("");
 const[error,setError]=useState(' ');
 const[status,setStatus]=useState(' ');
 
@@ -88,8 +88,17 @@ justify-content:center
 
 const imageHandler=(e)=>{
   e.preventDefault();
-  SetfoodImg(URL.createObjectURL( e.target.files[0]))
+  const file = e.target.files[0];
+  const fileReader = new FileReader();
+  fileReader.onload = () => {
+    // console.log(fileReader.result.toString());  
+    SetfoodImg(fileReader.result.toString());
+
+  };
+ fileReader.readAsDataURL(file)
+
 }
+
 
   return (
  <>
@@ -116,7 +125,8 @@ const imageHandler=(e)=>{
       />
       <ButtonTag>
  
-  <input type='file' accept="image/*"  onChange={imageHandler}/>
+  <input type='file' accept="image/*"  onChange={(e)=>{
+    imageHandler(e)}}/>
 
 
   </ButtonTag>

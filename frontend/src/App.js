@@ -11,10 +11,13 @@ import User from './components/userProfile/user/User'
 import AdminDashboard from './components/AdminPanel/Combinefeatures'
 import ProductList from './components/AdminPanel/productPanel/productList/ProductList'
 import Stripe from './components/StripeCheckout/Stripe'
+import Success from './components/Utils/Success/Success'
 
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { dispatchLogin } from './components/redux/action/authAction'
+import NotFound from './components/Utils/404/NotFound'
+
 
 
 
@@ -42,8 +45,9 @@ const App = () => {
    <Route path="/AdminproductList" element={<ProductList/>} />   
    <Route path="/UserProfile/:userId" element={<User/>}/>
    <Route path="/payment" element={<Stripe/>}/>
-   {/* <Route path="/dashboard/*" element={<AdminPanel/>}/> */}
-   {/* <Route path="adminFoodupdate" element={<FormDailog/>}/> */}
+   <Route path="/success" element={<Success/>}/>
+   <Route path="/*" element={<NotFound/>}/>
+
    </Routes>
 
     </> 

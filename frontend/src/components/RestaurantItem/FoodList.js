@@ -106,13 +106,13 @@ const deleteItem=(items)=>{
 dispatch({type:'foodDelete',payload:items})
  
 }
-
+// const bolb=URL.createObjectURL(items.foodImg);
     return (
    <div >
       <Container >
         {/* <Circle /> */}
-       
-        <Image src={items.foodImg} />
+      
+        <Image src={items.foodImg}/>
         <Info>
           <Icon>
           {
