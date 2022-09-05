@@ -5,6 +5,7 @@ import { useDispatch,useSelector } from 'react-redux';
 // import {removeFromCart} from '../redux/actions/shoppingCartAction'
 import { NavLink } from 'react-router-dom';
 import Stripe from '../StripeCheckout/Stripe';
+import axios from 'axios';
 
 // import cartItems from './data';
 // import StripeCheckout from 'react-stripe-checkout';
@@ -178,36 +179,63 @@ font-size: larger;
 /* width: ; */
 `
 const Cart = () => {
+
+
+const[productId,setproductId]=useState('');  
+const[productImg,setproductImg]=useState('');
+const[Price,setPrice]=useState(0);
+
+
   const dispatch=useDispatch();
   const cart=useSelector(state=>state.cart)
   // console.log(cart)
   const{cartItems,totalPrice}=cart;
+  var size = Object.keys(cartItems).length;
+//  console.log(size)
   const[rangeItem,setRangeItem]=useState([]);
   const[quantity,setQuantity]=useState(1);
-// const toalPrice=100
+  // console.log(cartItems.product)
 
-    // const onToken = token => {
-    //   const body = {
-    //     amount: 999,
-    //     token: token
-    // };
-    // axios .post("http://localhost:5000/payment", body)
-    //     .then(response => {
-    //       console.log(response);
-    //       alert("Payment Success");
-    //     })
-    //     .catch(error => {
-    //       console.log("Payment Error: ", error);
-    //       alert("Payment Error");
-    //     });
-    // };
+const cartHandler=async(totalPrice)=>{
+  // e.preventDefault();
+ console.log(totalPrice)
+
+  try{
+    const config={
+      headers:{
+       "Content-Type": "application/json",
+      }
+    }
+
+    const {data}=await axios.post('http://localhost:5000/cart',{
+    totalPrice
+    },config);
+    console.log(data);
+    console.log(data.status)
+    // localStorage.setItem('userinfo',JSON.stringify(data))
+ 
+    // setStatus(200);
+    // if(data){
+    //   toast.success('success',{
+    //     position: 'top-center'
+    //   });
+    // }
+    // window.alert("Registration Success");
+    //  navigate("/login");
+   
+  }catch(err){
+    // if(err){
+    //   toast.error(err.response.data,{
+    //     position: 'top-center'
+    //   });
+    //  }
+    console.log(err)
+    // setStatus(err.response.status)
+    // setError(err.response.data)
+  }
 
 
-  // console.log(totalPrice)
-// var size = Object.keys(cartItems).length;
-// var filtercartItems =  cartItems.filter(item => item.product!==undefined);
-//  console.log(filtercartItems )
-
+}
 
 
   return (
@@ -217,7 +245,7 @@ const Cart = () => {
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag({size})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -234,8 +262,8 @@ const Cart = () => {
                   <ProductName>
                     <b>Product:</b> {item.foodName} 
                   </ProductName>
-                  <ProductId>
-                    <b>ID:</b>{item.product}
+                  <ProductId   onChange={(e)=>setproductId(item.product)}>
+                    <b>ID:</b>{item.product} 
                   </ProductId>
             
                  
@@ -282,8 +310,9 @@ const Cart = () => {
               <SummaryItemPrice>{totalPrice} TK </SummaryItemPrice>
             </SummaryItem>
             {
-            totalPrice? <form action="http://localhost:5000/create-checkout-session/${totalPrice}" method="POST">
-        <Button type="submit" >
+              
+            totalPrice? <form action="http://localhost:5000/create-checkout-session/{totalPrice}"  method="POST" onSubmit={()=>cartHandler(totalPrice)} >
+        <Button type="submit"   >
           Checkout
         </Button>
       </form>

@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core'
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container=styled.div`
@@ -29,12 +30,15 @@ const Img=styled.img`
 const Success = () => {
   return (
  <Container>
-     <Title>SUCCESS</Title>
+     <Title>PAYMENT SUCCESS</Title>
      <br />
-     <Img src="https://res.cloudinary.com/cse347/image/upload/v1650649130/FoodSwipe/success_kpeewo.png"/>
+     <Img src="https://res.cloudinary.com/cse347/image/upload/v1662203609/payment_rqt8js.gif"/>
      <Btn>
 
-      <button>success</button>
+     <Button variant="contained" color="primary" >
+     <NavLink to='/'>Back to home</NavLink>
+     
+      </Button>
      </Btn>
  </Container>
   )

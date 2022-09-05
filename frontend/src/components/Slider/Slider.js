@@ -51,9 +51,11 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  object-fit: cover;
 `;
 const Img = styled.img`
   height: 80%;
+  object-fit: cover;
   ;
   /* width:10px;
 height: 10px; */
@@ -104,7 +106,7 @@ const Slider = () => {
           </ImgContainer>
           <InfoContainer>
             <Title>{item.title}</Title>
-            <Desc>40% off</Desc>
+            <Desc>{item.desc}</Desc>
             <Button>View Menu</Button>
           </InfoContainer>
         </Slide>

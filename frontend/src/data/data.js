@@ -7,26 +7,28 @@ import r2 from "../img/resturant_img/naga-burger.jpg"
 import r3 from "../img/resturant_img/great-pizza.jpg"
 
 export const sliderItems = [
-  {
-    id: 1,
-    img: burger1,
-    title: "SUMMER SALE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
-    bg: "fcf1ed",
-  },
 
   {
     id: 2,
     img: pizza1,
-    title: "AUTUMN COLLECTION",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    title: "PIZZA",
+    desc: "BUY 1 GET 1.",
     bg: "fcf1ed",
   },
+  {
+    id: 1,
+    img: burger1,
+    title: "EID OFFER",
+    desc: "30% OFF ",
+    bg: "fcf1ed",
+  },
+
+
   {
     id: 3,
     img: "",
     title: "LOUNGEWEAR LOVE",
-    desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+    desc: " 30% OFF.",
     bg: "fbf0f4",
   },
 ];

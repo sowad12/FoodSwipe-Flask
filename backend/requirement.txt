@@ -1,5 +1,0 @@
-pip install flask
-pip install Flask pymongo -->install mongodb 
- pip install bcrypt   -->password hashing
-pip install flask-cors
-$env:FLASK_DEBUG = "1" --powershell debugger mode on 

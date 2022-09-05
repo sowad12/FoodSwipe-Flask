@@ -1,29 +1,47 @@
+import { Button } from '@material-ui/core'
 import React from 'react'
-import './NotFound.css'
-const NotFound = () => {
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Container=styled.div`
+/* position: fixed; */
+`
+
+const Title=styled.h2`
+padding-top: 20px;
+text-align:center;
+color:#6cc070
+`
+const  Btn=styled.div`
+text-align: center;
+border-radius: 50px;
+color:#6cc070
+`
+
+const Img=styled.img`
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 20px;
+  width: 130vh;
+  height: 70vh;
+  object-fit: cover;
+`
+const Success = () => {
   return (
-    <section className="page_404">
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12 ">
-          <div className="col-sm-10 col-sm-offset-1  text-center">
-            <div className="four_zero_four_bg">
-              <h1 className="text-center ">404</h1>
-            </div>
-            <div className="contant_box_404">
-              <h3 className="h2">Look like you're lost</h3>
-              <p>the page you are looking for not avaible!</p>
-              <a href="/" className="link_404">
-                Go to Home
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+ <Container>
+     <Title>oops something wrong</Title>
+     <br />
+     <Img src="https://res.cloudinary.com/cse347/image/upload/v1662204676/error_gsrv4t.gif"/>
+     <Btn>
+
+     <Button variant="contained" color="secondary" >
+     <NavLink to='/'>Back to home</NavLink>
+     
+      </Button>
+     </Btn>
+ </Container>
   )
 }
 
-export default NotFound
+export default Success
