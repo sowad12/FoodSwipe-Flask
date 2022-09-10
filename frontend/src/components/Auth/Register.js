@@ -20,18 +20,7 @@ const[phone,setPhone]=useState('');
 const[error,setError]=useState(' ');
 const[status,setStatus]=useState(' ');
 
-// const notify = (data,status) => {
-//   if(status===200){
-//    toast.success('CHECK YOUR EMAIL',{
-//      position: 'top-center'
-//    });
 
-//   }else{
-//  toast.error(data,{
-//    position: 'top-center'
-//  });
-// }
-// }
 
 const registerUser=async(e)=>{
   e.preventDefault();
@@ -56,7 +45,7 @@ const registerUser=async(e)=>{
  
     setStatus(200);
     if(data){
-      toast.success('Check Your Email',{
+      toast.success('Registration Success',{
         position: 'top-center'
       });
     }

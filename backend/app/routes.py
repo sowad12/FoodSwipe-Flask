@@ -323,10 +323,10 @@ def create_checkout_session(totalPrice):
                     # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
                     # 'price': 'price_1LbqGaEYl23s23aNyz0dIjzE',
                     # 'quantity': 1,
-                    "name": "T-shirt",
+                    "name": "Total Price",
                     "quantity": 1,
                     "currency": "usd",
-                    "amount": "1000",
+                    "amount": "100000",
                 },
             ],
             mode='payment',
