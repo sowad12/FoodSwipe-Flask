@@ -12,7 +12,7 @@ import AdminDashboard from './components/AdminPanel/Combinefeatures'
 import ProductList from './components/AdminPanel/productPanel/productList/ProductList'
 import Stripe from './components/StripeCheckout/Stripe'
 import Success from './components/Utils/Success/Success'
-
+import AuthOutlet from './components/privateRoute/AuthOutlet'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { dispatchLogin } from './components/redux/action/authAction'
@@ -39,7 +39,11 @@ const App = () => {
    <Route path="/RestaurantMenu/:Restaurant" element={<FoodMenu/>} />
    <Route path="register" element={<Register />} />
    <Route path="login" element={<Login />} />
+
+   <Route  element={<AuthOutlet/>}>
    <Route path="/SingleFood/:foodRestId/:foodName/:id" element={<SingleFood/>} />
+   </Route>
+
    <Route path="/cart" element={<Cart/>} />
    <Route path="/adminDashboard" element={<AdminDashboard />}/>
    <Route path="/AdminproductList" element={<ProductList/>} />   

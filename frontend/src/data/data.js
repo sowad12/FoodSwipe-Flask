@@ -27,7 +27,7 @@ export const sliderItems = [
   {
     id: 3,
     img: "",
-    title: "LOUNGEWEAR LOVE",
+    title: "Student Pack",
     desc: " 30% OFF.",
     bg: "fbf0f4",
   },
