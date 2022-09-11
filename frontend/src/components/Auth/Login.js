@@ -7,14 +7,16 @@ import './css/style.css'
 import p1 from "./img/register_img/wave.png";
 import p2 from "./img/register_img/bg.svg";
 import p3 from "./img/register_img/avatar.svg";
+import adminpic from './img/register_img/login.svg'
+import back from './img/register_img/online4.jpg'
 import './js/main';
 import { useNavigate } from 'react-router-dom';
 // import {dispatchLogin} from '../redux/actions/authAction';
 import { dispatchLogin } from '../redux/action/authAction';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 const Login = () => {  
-
+const {isAdmin}=useSelector(state=>state.auth)
 
 const navigate = useNavigate();
 const[email,setEmail]=useState('');
@@ -74,12 +76,13 @@ const loginUser=async(e)=>{
 }
 
   return (
+    
   <>
-  
-  <img className="wave" src={p1} alt=" " />
+   
+  <img className="wave" src={back} alt=" " />
       <div className="container">
         <div className="img">
-          <img src={p2} alt=" " />
+          <img  alt=" " style={{ display:  "none" }}/>
         </div>
         <div className="login-content">
        
@@ -141,6 +144,7 @@ const loginUser=async(e)=>{
           </form>
         </div>
       </div>
+  
   </>
   )
 }
