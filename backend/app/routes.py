@@ -68,7 +68,7 @@ def login():
 @app.route('/userProfile/<string:userId>',methods=['PUT'])   
 
 def userProfile(userId):
-    print(userId)
+    # print(userId)
     d=dict()
     d={
      'name':request.json['name'],
@@ -76,7 +76,7 @@ def userProfile(userId):
      'phone':request.json['phone']
 
     }
-    print(d)
+    # print(d)
     id=ObjectId(userId)
     prev_cursor={"_id":id};
   
@@ -125,7 +125,7 @@ def getSortFoods(foodRestId,sortTag):
        cursor=cursor.sort('foodPrice')# by default .sort('foodPrice',1)
        cursor=json.loads(json_util.dumps(cursor))
        l=list(cursor)
-       print(l)
+    #    print(l)
     
     
     elif(sortTag=='desc'):
