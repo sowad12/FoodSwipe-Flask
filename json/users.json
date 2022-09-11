@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "630e2f951b47dbd97efdd7ba"
+  },
+  "name": "admin",
+  "email": "admin@gmail.com",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDA4JFp5cmwxV2ZIZGVjLjA0eDZhL29TZ093aVFrY2tBRUxyTThnbFJKU0NMVFI5N00xN3BoSDZl",
+      "subType": "00"
+    }
+  },
+  "confirm_password": {
+    "$binary": {
+      "base64": "JDJiJDA4JFlBb215bmhUcjVVWkxjaTRUazR1OC5PdU1Jc1NJR0ZOd1M4cU5NTWl2RW05clU1WDFCQ2N1",
+      "subType": "00"
+    }
+  },
+  "phone": "01627939749",
+  "role": 1
+},{
+  "_id": {
+    "$oid": "631c6d4b12f2e63bfc92424f"
+  },
+  "name": "sowad",
+  "email": "ashfaqulislam4566@gmail.com",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDA4JDVVT1czbS9GSjdSQ2JVT1hZWGRZbmVMRy5jbnRsa2djQjlnZlFWQ20uZjN6OWZmR3ZiWW1D",
+      "subType": "00"
+    }
+  },
+  "confirm_password": {
+    "$binary": {
+      "base64": "JDJiJDA4JFV1WEMzaTdSVDUyM05NekR2M1ZpS09YZVBTemw0RXdnbDZPQ3BoLjhrNkxKY1Q0Wk1RdC5L",
+      "subType": "00"
+    }
+  },
+  "phone": "01627939749",
+  "role": 0
+}]
